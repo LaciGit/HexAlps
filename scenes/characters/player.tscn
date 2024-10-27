@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://espvp1sf1boe"]
+
+[ext_resource type="Script" path="res://src/characters/player.gd" id="1_1pn7l"]
+[ext_resource type="Texture2D" uid="uid://2nix6q2nb0aa" path="res://assets/aseprite/characters/gustav.png" id="1_u7va5"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_1pn7l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -7)
+texture = ExtResource("1_u7va5")
