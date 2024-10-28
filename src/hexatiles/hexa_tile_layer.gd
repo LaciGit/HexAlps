@@ -18,9 +18,13 @@ func _process(delta: float) -> void:
 
 
 func _input(event) -> void:
+
+	# on mouse event
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.is_pressed():
 			var pos_clicked = local_to_map(get_local_mouse_position())
-			cell_action.emit(pos_clicked)
+			cell_action.emit(pos_clicked, true)
 
-			
+		elif event.button_index == MOUSE_BUTTON_RIGHT and event.is_pressed():
+			var pos_clicked = local_to_map(get_local_mouse_position())
+			cell_action.emit(pos_clicked, false)
