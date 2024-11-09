@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://b800pj3isujnq"]
+
+[ext_resource type="Script" path="res://src/game_manager/game_manager.gd" id="1_anml6"]
+[ext_resource type="PackedScene" uid="uid://7hn22jghhmy2" path="res://scenes/tileset/tileset.tscn" id="1_xx0hd"]
+
+[node name="Debug" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_anml6")
+
+[node name="TileMap" parent="." instance=ExtResource("1_xx0hd")]
+metadata/_edit_lock_ = true
+
+[editable path="TileMap"]

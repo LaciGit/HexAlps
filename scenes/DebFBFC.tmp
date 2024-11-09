@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b800pj3isujnq"]
+
+[ext_resource type="Script" path="res://src/game_manager/game_manager.gd" id="1_anml6"]
+
+[node name="Debug" type="Node2D"]
+
+[node name="GameManager" type="Node" parent="." node_paths=PackedStringArray("hexa_tile_layer_0")]
+script = ExtResource("1_anml6")
+hexa_tile_layer_0 = NodePath("")

@@ -45,17 +45,17 @@ tile_size = Vector2i(72, 82)
 sources/0 = SubResource("TileSetAtlasSource_aqlgb")
 sources/1 = SubResource("TileSetAtlasSource_4hcll")
 
-[node name="TileSet" type="Node2D" node_paths=PackedStringArray("hexa_tile_layer_0", "hexa_tile_layer_1")]
+[node name="HexaTileSet" type="Node2D" node_paths=PackedStringArray("hexa_tile_layer_0", "hexa_tile_layer_1")]
 script = ExtResource("1_difp2")
-hexa_tile_layer_0 = NodePath("TileMapPixel")
-hexa_tile_layer_1 = NodePath("TileMapPixel2")
+hexa_tile_layer_0 = NodePath("HexaTileLayer1")
+hexa_tile_layer_1 = NodePath("HexaTileLayer2")
 
-[node name="TileMapPixel" type="TileMapLayer" parent="."]
+[node name="HexaTileLayer1" type="TileMapLayer" parent="."]
 tile_set = SubResource("TileSet_b2oii")
 script = ExtResource("94_kiyck")
 metadata/_edit_lock_ = true
 
-[node name="TileMapPixel2" type="TileMapLayer" parent="."]
+[node name="HexaTileLayer2" type="TileMapLayer" parent="."]
 z_index = 1
 tile_set = SubResource("TileSet_b2oii")
 script = ExtResource("94_kiyck")
