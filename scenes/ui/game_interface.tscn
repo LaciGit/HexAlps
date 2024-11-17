@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsd76d68bfwrv"]
+
+[ext_resource type="Script" path="res://src/ui/game_interface.gd" id="1_c4vkn"]
+
+[node name="GameInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_c4vkn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+color = Color(1, 1, 1, 0)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Container4Status" type="HBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="InventoryFoo" type="ColorRect" parent="MarginContainer/VBoxContainer/HBoxContainer/Container4Status"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 10.0
+color = Color(1, 1, 1, 0)
+
+[node name="ProgressBarEnergy" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/Container4Status"]
+unique_name_in_owner = true
+modulate = Color(0.195666, 0.441493, 0.202576, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+tooltip_text = "Energy"
+max_value = 10.0
+step = 1.0
+value = 10.0
+fill_mode = 3
+
+[node name="NextTurnButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_vertical = 8
+text = "Next Turn"
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/HBoxContainer/NextTurnButton" to="." method="_on_next_turn_button_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/VBoxContainer/HBoxContainer/NextTurnButton" to="." method="_on_next_turn_button_mouse_exited"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/NextTurnButton" to="." method="_on_next_turn_button_pressed"]
