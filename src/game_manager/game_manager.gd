@@ -29,6 +29,7 @@ func _ready() -> void:
 
 		# set player
 		player = tmp_player
+		player.update_player_stats_on_ui.connect(update_player_stats_on_ui)
 
 	# connect signals
 	game_interface.next_turn.connect(on_next_turn)
@@ -37,7 +38,7 @@ func _ready() -> void:
 
 
 func on_next_turn() -> void:
-	update_player_stats()
+	reset_update_player_stats()
 
 func on_player_with_tiles(selected_walkable_tiles: Array[Vector2i]) -> void:
 	# game manager should do something if player selects a resource tile
@@ -47,9 +48,12 @@ func on_player_move(selected_walkable_tiles: Array[Vector2i]) -> void:
 	"""move player to selected walkable tiles
 	:param selected_walkable_tiles: Array of selected walkable tiles Array[vector2i]
 	"""
+
+	print(player.player_stats.energy)
+
 	# do not move player
 	var current_player_pos: Vector2i = hexa_tile_layer_0.local_to_map(player.position)
-	if current_player_pos == selected_walkable_tiles[0] or player.energy <= 0:
+	if current_player_pos == selected_walkable_tiles[0] or player.player_stats.energy <= 0:
 		return
 
 	# check if selected walkable tiles are neighbouring to player
@@ -70,7 +74,7 @@ func on_player_move(selected_walkable_tiles: Array[Vector2i]) -> void:
 
 	# since we currently only allow to move to neighbouring tiles -> movement done is 1
 	player.move_player(local_selected_walkable_tiles, 1)
-	update_progress_bar_energy()
+
 
 	# check if resources are neighbouring to player and we have to select them#
 	var neighbours = hexa_tile_set.get_neighbours(hexa_tile_layer_0.local_to_map(player.position))
@@ -80,13 +84,15 @@ func on_player_move(selected_walkable_tiles: Array[Vector2i]) -> void:
 	# update player camera
 	camera_over_player.position = player.position
 
-func update_progress_bar_energy() -> void:
-	game_interface.progress_bar_energy.value = player.energy
 
-func update_player_stats() -> void:
-	player.energy = 10
-	update_progress_bar_energy()
+func update_player_stats_on_ui(player_stats: PlayerStats) -> void:
+	# called by player
+	game_interface.progress_bar_energy.value = player.player_stats.energy
 
-	# reset to player
+func reset_update_player_stats() -> void:
+	# reset - energy
+	player.reset_energy()
+
+	# reset - highlighted walkable tiles
 	hexa_tile_set.clear_selected_walkable_tiles()
 	hexa_tile_set.cell_action(hexa_tile_layer_0.local_to_map(player.position), true, false)
